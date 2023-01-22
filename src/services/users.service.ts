@@ -59,7 +59,7 @@ export class UsersService {
   }
 
   addUserToScene = (user: IUser) => {
-    const model = new User().withName(user).build();
+    const model = new User(user).withName().build();
     model.name = String(user.id);
     this.models[user.id] = model;
     scene.add(model);
@@ -74,9 +74,10 @@ export class UsersService {
 
   onUserMoved({ user, p, r }: any) {
     const model = scene.getObjectByName(String(user.id))!;
-    model.position.lerp(p, 0.5);
-    // model.rotation.slerp(r);
-    model.quaternion.slerp(new Quaternion().setFromEuler(r), 0.5);
+    model.position.lerp(p, 0.2);
+    // model.position.copy(p);
+    model.rotation.copy(r);
+    // model.quaternion.slerp(new Quaternion().setFromEuler(r), 0.1);
   }
 }
 
