@@ -1,5 +1,5 @@
 import { Color, FogExp2, Scene } from "three";
-import { head } from "./head";
+import { camera } from "./camera";
 import { floor } from "./floor";
 import { ambientLight } from "./ambient-light";
 import { directionalLight } from "./directional-light";
@@ -9,7 +9,7 @@ import { Sphere } from "./sphere";
 export const scene = new Scene();
 scene.background = new Color(0xffffff);
 scene.fog = new FogExp2(0xdba495, 0.02);
-scene.add(head);
+scene.add(camera);
 scene.add(floor);
 scene.add(ambientLight, directionalLight);
 scene.add(environment);

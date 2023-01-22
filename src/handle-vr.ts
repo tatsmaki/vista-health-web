@@ -1,6 +1,6 @@
 import { renderer } from "./renderer";
 import { scene } from "./3d/scene";
-import { camera } from "./3d/head";
+import { camera } from "./3d/camera";
 import { vrUsersFrame } from "./frames/vr-users.frame";
 import { vrSyncFrame } from "./frames/vr-sync.frame";
 

@@ -1,5 +1,5 @@
 import { Vector3 } from "three";
-import { head } from "../3d/head";
+import { camera } from "../3d/camera";
 import { usersService } from "../services/users.service";
 
 export const pcUsersFrame = () => {
@@ -13,6 +13,6 @@ export const pcUsersFrame = () => {
       model.quaternion.slerp(quaternion, 0.08);
     }
     const username = model.children[0];
-    username.lookAt(new Vector3(head.position.x, 1.7, head.position.z));
+    username.lookAt(new Vector3(camera.position.x, 1.7, camera.position.z));
   }
 };

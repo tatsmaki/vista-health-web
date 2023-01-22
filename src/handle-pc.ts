@@ -1,6 +1,6 @@
 import { renderer } from "./renderer";
 import { scene } from "./3d/scene";
-import { camera } from "./3d/head";
+import { camera } from "./3d/camera";
 import { KeyboardController } from "./controllers/keyboard.controller";
 import { LockController } from "./controllers/lock.controller";
 import { MouseController } from "./controllers/mouse.controller";
