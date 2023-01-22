@@ -5,7 +5,7 @@ import { KeyboardController } from "./controllers/keyboard.controller";
 import { LockController } from "./controllers/lock.controller";
 import { MouseController } from "./controllers/mouse.controller";
 import { moveFrame } from "./frames/move.frame";
-import { pcUsernamesFrame } from "./frames/pc-usernames.frame";
+import { pcUsersFrame } from "./frames/pc-users.frame";
 import { pcSyncFrame } from "./frames/pc-sync.frame";
 
 export const handlePC = () => {
@@ -17,7 +17,7 @@ export const handlePC = () => {
 
   renderer.setAnimationLoop((t) => {
     moveFrame(keyboardController);
-    pcUsernamesFrame();
+    pcUsersFrame();
     pcSyncFrame();
     renderer.render(scene, camera);
   });

@@ -74,13 +74,12 @@ export class UsersService {
 
   onUserMoved({ user, p, r }: any) {
     const model = scene.getObjectByName(String(user.id))!;
-    const position = new Vector3(p.x, p.y, p.z);
-    for (let i = 0; i < 10; i += 1) {
-      model.position.lerp(position, 0.1);
-    }
+    // const position = new Vector3(p.x, p.y, p.z);
+    model.userData.position = p;
+    // const rotation = new Euler(r.x, r.y, r.z);
+    model.userData.quaternion = new Quaternion().setFromEuler(r);
     // model.position.copy(p);
-    model.rotation.copy(r);
-    // model.quaternion.slerp(new Quaternion().setFromEuler(r), 0.4);
+    // model.rotation.copy(r);
   }
 }
 

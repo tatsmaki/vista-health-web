@@ -35,16 +35,15 @@ export class User {
     const { full_name, platform } = this.user;
     const text = `${full_name} (${platform.toUpperCase()})`;
     context.clearRect(0, 0, 200, 100);
-    context.fillText(text, 0, 20);
+    context.fillText(text, 30, 20);
     texture.needsUpdate = true;
     const geometry = new PlaneGeometry(1, 0.5);
     const material = new MeshStandardMaterial({
       map: texture,
       transparent: true,
-      side: DoubleSide,
     });
     const mesh = new Mesh(geometry, material);
-    mesh.position.set(-0.25, this.offsetY + 0.4, -0.25);
+    mesh.position.set(0, this.offsetY + 0.4, -0.25);
     this.group.add(mesh);
     return this;
   }
