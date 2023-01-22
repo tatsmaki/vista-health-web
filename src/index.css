@@ -1,0 +1,53 @@
+* {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(#c7a3b9, #dbb4b6, #dba495, #c3acb1);
+}
+
+canvas {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+.join_form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+
+.join_form > *:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+input {
+  border: none;
+  outline: none;
+  border-radius: 0px;
+  padding: 8px 16px;
+}
+
+button {
+  border: none;
+  outline: none;
+  border-radius: 0px;
+  padding: 8px 16px;
+  background-color: #a292aa;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
