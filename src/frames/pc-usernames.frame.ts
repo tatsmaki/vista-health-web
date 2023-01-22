@@ -2,7 +2,7 @@ import { Vector3 } from "three";
 import { head } from "../3d/head";
 import { usersService } from "../services/users.service";
 
-export const usernamesFrame = () => {
+export const pcUsernamesFrame = () => {
   for (let i = 0; i < Object.keys(usersService.models).length; i += 1) {
     const model = Object.values(usersService.models)[i];
     const username = model.children[0];
