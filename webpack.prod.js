@@ -18,10 +18,10 @@ module.exports = merge(config, {
           from: "public/textures",
           to: "textures",
         },
-        {
-          from: "public/models",
-          to: "models",
-        },
+        // {
+        //   from: "public/models",
+        //   to: "models",
+        // },
       ],
     }),
   ],
