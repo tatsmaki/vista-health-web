@@ -5,4 +5,4 @@ import { usersGateway } from "../services/users.gateway";
 
 export const pcSyncFrame = throttle(() => {
   usersGateway.moveUser(authService.user$!, head.position, head.rotation);
-}, 100);
+}, 200);
