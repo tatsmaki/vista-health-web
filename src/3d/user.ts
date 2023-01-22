@@ -13,10 +13,14 @@ import { IUser } from "../interfaces/user.interface";
 
 export class User {
   private group = new Group();
+  private offsetY = 0;
 
   constructor(private readonly user: IUser) {
-    const y = user.platform === Devices.VR ? 0 : 1.7;
-    this.group.position.set(0, y, 0);
+    if (user.platform === Devices.VR) {
+      this.offsetY = 0;
+    } else {
+      this.offsetY = 1.7;
+    }
   }
 
   withName() {
@@ -40,7 +44,7 @@ export class User {
       side: DoubleSide,
     });
     const mesh = new Mesh(geometry, material);
-    mesh.position.set(0.25, 0.4, 0.25);
+    mesh.position.set(-0.25, this.offsetY + 0.4, -0.25);
     this.group.add(mesh);
     return this;
   }
@@ -49,6 +53,7 @@ export class User {
     const geometry = new BoxGeometry(0.5, 0.5, 0.5);
     const material = new MeshStandardMaterial({ color: 0xa292aa });
     const mesh = new Mesh(geometry, material);
+    mesh.position.set(0, this.offsetY, 0);
     this.group.add(mesh);
     return this.group;
   }
