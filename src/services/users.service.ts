@@ -74,10 +74,10 @@ export class UsersService {
 
   onUserMoved({ user, p, r }: any) {
     const model = scene.getObjectByName(String(user.id))!;
-    model.position.lerp(p, 0.2);
+    model.position.lerp(p, 0.4);
     // model.position.copy(p);
     model.rotation.copy(r);
-    // model.quaternion.slerp(new Quaternion().setFromEuler(r), 0.1);
+    // model.quaternion.slerp(new Quaternion().setFromEuler(r), 0.4);
   }
 }
 
