@@ -50,12 +50,11 @@ export class User {
   }
 
   withCamera() {
-    const geometry = new ConeGeometry(2, 2, 4);
+    const geometry = new ConeGeometry(0.5, 0.75, 4);
     const wireframe = new WireframeGeometry(geometry);
     const line = new LineSegments(wireframe);
-    line.rotation.z = Math.PI / 2;
-    line.rotation.y = Math.PI / 2;
-    line.position.set(this.offsetY, -1, 0);
+    line.rotation.x = Math.PI / 2;
+    line.position.set(0, this.offsetY, -0.63);
     this.group.add(line);
     return this;
   }
