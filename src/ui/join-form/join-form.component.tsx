@@ -34,7 +34,7 @@ const JoinForm = () => {
     // @ts-ignore
     const full_name = event.target["full_name"].value;
     usersService
-      .createUser(full_name, "PC")
+      .createUser(full_name, device)
       .then((user) => {
         usersGateway.createUser(user);
         authService.login(user);

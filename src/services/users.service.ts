@@ -1,5 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
-import { Object3D } from "three";
+import { Object3D, Quaternion } from "three";
 import { scene } from "../3d/scene";
 import { User } from "../3d/user";
 import { IUser } from "../interfaces/user.interface";
@@ -74,8 +74,9 @@ export class UsersService {
 
   onUserMoved({ user, p, r }: any) {
     const model = scene.getObjectByName(String(user.id))!;
-    model.position.copy(p);
-    model.rotation.copy(r);
+    model.position.lerp(p, 0.5);
+    // model.rotation.slerp(r);
+    model.quaternion.slerp(new Quaternion().setFromEuler(r), 0.5);
   }
 }
 
