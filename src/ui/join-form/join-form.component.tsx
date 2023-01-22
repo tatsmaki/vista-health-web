@@ -10,18 +10,23 @@ import { usersService } from "../../services/users.service";
 
 const JoinForm = () => {
   const [loading, setLoading] = useState(true);
+  const [device, setDevice] = useState("");
   const { users$ } = usersService;
   const { user$ } = authService;
 
   useEffect(() => {
     usersService.getUsers().then(() => setLoading(false));
+    xrController
+      .requestVrSession()
+      .then((isVr) => setDevice(isVr ? "VR" : "PC"));
   }, []);
 
   const handle3D = () => {
-    return xrController
-      .requestVrSession()
-      .then(() => handleVR())
-      .catch(() => handlePC());
+    if (device === "PC") {
+      handlePC();
+    } else {
+      xrController.enterVrSession().then(handleVR);
+    }
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -51,8 +56,8 @@ const JoinForm = () => {
         disabled={!!user$}
         defaultValue={user$?.full_name}
       />
-      <button type="submit" disabled={loading || !!user$}>
-        {user$ ? "Joined" : "Join"}
+      <button type="submit" disabled={loading || !device || !!user$}>
+        {user$ ? "Joined" : `Join ${device === "PC" ? "from PC" : "VR"}`}
       </button>
       {user$ && (
         <button type="button" onClick={handle3D}>

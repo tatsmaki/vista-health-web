@@ -8,16 +8,19 @@ export class XrController {
     this.onSessionEnd = this.onSessionEnd.bind(this);
   }
 
-  async requestVrSession() {
+  requestVrSession() {
     if (navigator.xr) {
-      await navigator.xr.isSessionSupported(this.mode);
-      return this.enterVrSession();
+      return navigator.xr.isSessionSupported(this.mode);
     }
+    return Promise.resolve(false);
   }
 
   async enterVrSession() {
     if (navigator.xr) {
-      this.session = await navigator.xr.requestSession(this.mode);
+      const options = {
+        optionalFeatures: ["local-floor"],
+      };
+      this.session = await navigator.xr.requestSession(this.mode, options);
       this.session.onend = this.onSessionEnd;
       await renderer.xr.setSession(this.session);
     }
