@@ -47,6 +47,11 @@ const JoinForm = () => {
   return (
     <form className="join_form" onSubmit={handleSubmit}>
       <span>People connected: {users$.length}</span>
+      {JSON.stringify({
+        loading,
+        device,
+        user$,
+      })}
       <input
         name="full_name"
         required
