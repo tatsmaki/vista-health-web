@@ -1,12 +1,13 @@
 import {
   BoxGeometry,
   CanvasTexture,
-  DoubleSide,
+  ConeGeometry,
   Group,
+  LineSegments,
   Mesh,
   MeshStandardMaterial,
   PlaneGeometry,
-  Vector3,
+  WireframeGeometry,
 } from "three";
 import { Devices } from "../constants/devices.constants";
 import { IUser } from "../interfaces/user.interface";
@@ -45,6 +46,17 @@ export class User {
     const mesh = new Mesh(geometry, material);
     mesh.position.set(0, this.offsetY + 0.4, -0.25);
     this.group.add(mesh);
+    return this;
+  }
+
+  withCamera() {
+    const geometry = new ConeGeometry(5, 10, 4);
+    const wireframe = new WireframeGeometry(geometry);
+    const line = new LineSegments(wireframe);
+    line.rotation.z = Math.PI / 2;
+    line.rotation.y = Math.PI / 2;
+    line.translateY(-5);
+    this.group.add(line);
     return this;
   }
 

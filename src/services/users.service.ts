@@ -59,7 +59,7 @@ export class UsersService {
   }
 
   addUserToScene = (user: IUser) => {
-    const model = new User(user).withName().build();
+    const model = new User(user).withName().withCamera().build();
     model.name = String(user.id);
     this.models[user.id] = model;
     scene.add(model);
