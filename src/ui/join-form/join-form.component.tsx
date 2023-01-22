@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { FormEvent, useState } from "react";
 import { useEffect } from "react";
+import { Devices } from "../../constants/devices.constants";
 import { xrController } from "../../controllers/xr.controller";
 import { handlePC } from "../../handle-pc";
 import { handleVR } from "../../handle-vr";
@@ -10,19 +11,17 @@ import { usersService } from "../../services/users.service";
 
 const JoinForm = () => {
   const [loading, setLoading] = useState(true);
-  const [device, setDevice] = useState("");
+  const [device, setDevice] = useState(Devices.Unknown);
   const { users$ } = usersService;
   const { user$ } = authService;
 
   useEffect(() => {
     usersService.getUsers().then(() => setLoading(false));
-    xrController
-      .requestVrSession()
-      .then((isVr) => setDevice(isVr ? "VR" : "PC"));
+    xrController.requestVrSession().then(setDevice);
   }, []);
 
   const handle3D = () => {
-    if (device === "PC") {
+    if (device === Devices.PC) {
       handlePC();
     } else {
       xrController.enterVrSession().then(handleVR);
@@ -47,11 +46,6 @@ const JoinForm = () => {
   return (
     <form className="join_form" onSubmit={handleSubmit}>
       <span>People connected: {users$.length}</span>
-      {JSON.stringify({
-        loading,
-        device,
-        user$,
-      })}
       <input
         name="full_name"
         required
@@ -61,8 +55,11 @@ const JoinForm = () => {
         disabled={!!user$}
         defaultValue={user$?.full_name}
       />
-      <button type="submit" disabled={loading || !device || !!user$}>
-        {user$ ? "Joined" : `Join ${device === "PC" ? "from PC" : "VR"}`}
+      <button
+        type="submit"
+        disabled={loading || device === Devices.Unknown || !!user$}
+      >
+        {user$ ? "Joined" : "Join"}
       </button>
       {user$ && (
         <button type="button" onClick={handle3D}>

@@ -1,3 +1,4 @@
+import { Devices } from "../constants/devices.constants";
 import { renderer } from "../renderer";
 
 export class XrController {
@@ -8,11 +9,15 @@ export class XrController {
     this.onSessionEnd = this.onSessionEnd.bind(this);
   }
 
-  requestVrSession() {
+  async requestVrSession() {
     if (navigator.xr) {
-      return navigator.xr.isSessionSupported(this.mode);
+      const isSupported = await navigator.xr.isSessionSupported(this.mode);
+      if (isSupported) {
+        return Devices.VR;
+      }
+      return Devices.PC;
     }
-    return Promise.resolve(false);
+    return Devices.Unknown;
   }
 
   async enterVrSession() {
