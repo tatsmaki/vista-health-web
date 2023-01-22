@@ -1,5 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
-import { Object3D, Quaternion, Vector3 } from "three";
+import { Euler, Object3D, Quaternion, Vector3 } from "three";
 import { scene } from "../3d/scene";
 import { User } from "../3d/user";
 import { IUser } from "../interfaces/user.interface";
@@ -75,8 +75,8 @@ export class UsersService {
   onUserMoved({ user, p, r }: any) {
     const model = scene.getObjectByName(String(user.id))!;
     const position = new Vector3(p.x, p.y, p.z);
-    for (let i = 0; i < 5; i += 1) {
-      model.position.lerp(position, 0.2);
+    for (let i = 0; i < 10; i += 1) {
+      model.position.lerp(position, 0.1);
     }
     // model.position.copy(p);
     model.rotation.copy(r);
