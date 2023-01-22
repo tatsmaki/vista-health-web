@@ -31,8 +31,9 @@ export class UsersService {
     const response = await fetch(`${url}/users`, {
       method: "GET",
     });
-    const users = await response.json();
+    const users: IUser[] = await response.json();
     this.setUsers(users);
+    users.forEach(this.addUserToScene);
     return users;
   }
 
@@ -54,6 +55,10 @@ export class UsersService {
 
   onUserCreated(user: IUser) {
     this.users$.push(user);
+    this.addUserToScene(user);
+  }
+
+  addUserToScene(user: IUser) {
     const model = new User().withName(user).build();
     model.name = String(user.id);
     this.models[user.id] = model;
