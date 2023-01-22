@@ -58,12 +58,12 @@ export class UsersService {
     this.addUserToScene(user);
   }
 
-  addUserToScene(user: IUser) {
+  addUserToScene = (user: IUser) => {
     const model = new User().withName(user).build();
     model.name = String(user.id);
     this.models[user.id] = model;
     scene.add(model);
-  }
+  };
 
   onUserRemoved({ id }: IUser) {
     this.users$ = this.users$.filter((user) => user.id !== id);
