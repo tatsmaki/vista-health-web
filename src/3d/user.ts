@@ -14,15 +14,8 @@ import { IUser } from "../interfaces/user.interface";
 
 export class User {
   private group = new Group();
-  private offsetY = 0;
 
-  constructor(private readonly user: IUser) {
-    if (user.platform === Devices.VR) {
-      this.offsetY = 0;
-    } else {
-      this.offsetY = 1.7;
-    }
-  }
+  constructor(private readonly user: IUser) {}
 
   withName() {
     const canvas = document.createElement("canvas");
@@ -44,7 +37,7 @@ export class User {
       transparent: true,
     });
     const mesh = new Mesh(geometry, material);
-    mesh.position.set(0, this.offsetY + 0.4, -0.25);
+    mesh.position.set(0, 0.4, -0.25);
     this.group.add(mesh);
     return this;
   }
@@ -54,7 +47,7 @@ export class User {
     const wireframe = new WireframeGeometry(geometry);
     const line = new LineSegments(wireframe);
     line.rotation.x = Math.PI / 2;
-    line.position.set(0, this.offsetY, -0.63);
+    line.position.set(0, 0, -0.63);
     this.group.add(line);
     return this;
   }
@@ -63,7 +56,7 @@ export class User {
     const geometry = new BoxGeometry(0.5, 0.5, 0.5);
     const material = new MeshStandardMaterial({ color: 0xa292aa });
     const mesh = new Mesh(geometry, material);
-    mesh.position.set(0, this.offsetY, 0);
+    mesh.position.set(0, 0, 0);
     this.group.add(mesh);
     return this.group;
   }
