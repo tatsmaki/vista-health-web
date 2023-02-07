@@ -12,11 +12,15 @@ import { usersService } from "../../services/users.service";
 const JoinForm = () => {
   const [loading, setLoading] = useState(true);
   const [device, setDevice] = useState(Devices.Unknown);
+  const [notConnected, setNotConnected] = useState(false);
   const { users$ } = usersService;
   const { user$ } = authService;
 
   useEffect(() => {
-    usersService.getUsers().then(() => setLoading(false));
+    usersService
+      .getUsers()
+      .catch(() => setNotConnected(true))
+      .finally(() => setLoading(false));
     xrController.requestVrSession().then(setDevice);
   }, []);
 
@@ -38,6 +42,9 @@ const JoinForm = () => {
       .then((user) => {
         usersGateway.createUser(user);
         authService.login(user);
+        return handle3D();
+      })
+      .catch(() => {
         return handle3D();
       })
       .finally(() => setLoading(false));
@@ -66,6 +73,7 @@ const JoinForm = () => {
           Continue
         </button>
       )}
+      {notConnected && <span>Socket connection is down. You are offline.</span>}
     </form>
   );
 };
