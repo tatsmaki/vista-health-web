@@ -17,6 +17,9 @@ export class XrController {
       }
       return Devices.PC;
     }
+    if (navigator.userAgent.includes("Mac OS")) {
+      return Devices.PC;
+    }
     return Devices.Unknown;
   }
 
