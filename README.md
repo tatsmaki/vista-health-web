@@ -2,7 +2,7 @@
 
 ## Environment
 
-```
+```sh
 PORT="3000"
 APP_API_URL="http://localhost:3002"
 ```
