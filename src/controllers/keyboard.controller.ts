@@ -12,20 +12,20 @@ export class KeyboardController {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    switch (event.key) {
-      case "w": {
+    switch (event.code) {
+      case "KeyW": {
         this.w = true;
         break;
       }
-      case "a": {
+      case "KeyA": {
         this.a = true;
         break;
       }
-      case "s": {
+      case "KeyS": {
         this.s = true;
         break;
       }
-      case "d": {
+      case "KeyD": {
         this.d = true;
         break;
       }
@@ -36,20 +36,20 @@ export class KeyboardController {
   }
 
   private handleKeyUp(event: KeyboardEvent) {
-    switch (event.key) {
-      case "w": {
+    switch (event.code) {
+      case "KeyW": {
         this.w = false;
         break;
       }
-      case "a": {
+      case "KeyA": {
         this.a = false;
         break;
       }
-      case "s": {
+      case "KeyS": {
         this.s = false;
         break;
       }
-      case "d": {
+      case "KeyD": {
         this.d = false;
         break;
       }
